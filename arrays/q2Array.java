@@ -1,8 +1,11 @@
+import java.util.Scanner;
+
 public class q2Array {
     private static final int N = 26; // Base for letters (a-z)
 
     public static void main(String[] args) {
-        String[] initArr = { "apple", "fig", "date", "banana", "cherry" }; // Sample array to be sorted
+        // String[] initArr = { "apple", "fig", "date", "banana", "cherry" }; // Sample array to be sorted
+        String[] initArr = getUserInput(); // Get user input for the array
         displayArray("Sample list", initArr);
         radixSort(initArr);
         displayArray("Sorted list", initArr);
@@ -107,5 +110,24 @@ public class q2Array {
                 System.out.print(", ");
         }
         System.out.println("]");
+    }
+
+    // Function to get user input for the array
+    private static String[] getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter the number of word(s): ");
+            int n = scanner.nextInt();
+            
+            String[] arr = new String[n];
+            System.out.println("Enter " + n + " word(s) (separated by spaces):");
+            for (int i = 0; i < n; i++) {
+                arr[i] = scanner.next();
+            }
+            
+            return arr;
+        } finally {
+            scanner.close();
+        }
     }
 }

@@ -1,8 +1,11 @@
+import java.util.Scanner;
+
 public class q1Array {
     private static final int N = 10; // Base for decimal numbers (0-9)
 
     public static void main(String[] args) {
-        int[] initArr = { 275, 87, 426, 61, 409, 170, 677, 503 }; // Sample array to be sorted
+        // int[] initArr = { 275, 87, 426, 61, 409, 170, 677, 503 }; // Sample array to be sorted
+        int[] initArr = getUserInput(); // Get user input for the array
         displayArray("Sample list", initArr);
         radixSort(initArr);
         displayArray("Sorted list", initArr);
@@ -119,5 +122,24 @@ public class q1Array {
             result *= base;
         }
         return result;
+    }
+
+    // Function to get user input for the array
+    private static int[] getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter the number of element(s): ");
+            int n = scanner.nextInt();
+            
+            int[] arr = new int[n];
+            System.out.println("Enter " + n + " integer(s) (separated by spaces):");
+            for (int i = 0; i < n; i++) {
+                arr[i] = scanner.nextInt();
+            }
+            
+            return arr;
+        } finally {
+            scanner.close();
+        }
     }
 }
