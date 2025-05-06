@@ -29,7 +29,7 @@ public class q3_2Array {
             }
         }    
     
-        writeToCSV("radix_string_ops.csv", csvData.toString());
+        writeToCSV("cpt212-asgn1/arrays/radix_string_ops.csv", csvData.toString());
     }
 
     private static String[] generateRandomStringArray(int size, int maxLen) {

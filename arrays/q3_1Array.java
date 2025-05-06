@@ -43,8 +43,7 @@ public class q3_1Array {
                 // System.out.println(n + "," + digits + "," + opCount);
             }
         }
-
-        writeToCSV("radix_digit_ops.csv", csvData.toString());
+        writeToCSV("cpt212-asgn1/arrays/radix_digit_ops.csv", csvData.toString());
     }
     
     /**
