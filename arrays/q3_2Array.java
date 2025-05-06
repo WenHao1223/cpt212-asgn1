@@ -7,6 +7,18 @@ public class q3_2Array {
     private static final int N = 26; // Base for letters (a-z)
     private static int opCount = 0; // Counter for Primitive Operations
 
+    /**
+     * The main method runs multiple tests of the radix sort algorithm for strings
+     * on randomly generated arrays of varying sizes and string lengths.
+     *
+     * It generates a CSV report containing:
+     * - n: number of elements in the array
+     * - maxLength: maximum string length
+     * - opCount: total primitive operations counted during the sort
+     *
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         StringBuilder csvData = new StringBuilder();
         csvData.append("n,maxLength,opCount\n");
@@ -32,6 +44,14 @@ public class q3_2Array {
         writeToCSV("cpt212-asgn1/arrays/radix_string_ops.csv", csvData.toString());
     }
 
+    /**
+     * Generates an array of random lowercase strings of varying lengths.
+     * Each string has a length between 1 and maxLen.
+     *
+     * @param size   The number of strings in the array.
+     * @param maxLen The maximum possible length of each string.
+     * @return An array of randomly generated lowercase strings.
+     */
     private static String[] generateRandomStringArray(int size, int maxLen) {
         Random rand = new Random();
         String[] arr = new String[size];
@@ -47,10 +67,18 @@ public class q3_2Array {
         return arr;
     }
 
-    // Function to perform radix sort
-    // This function sorts the array using radix sort algorithm
-    // It takes an array of strings as input and sorts it in ascending order
-    // It assumes that the strings contain only lowercase letters (a-z)
+    /**
+    * Performs radix sort on the given array of lowercase strings.
+    *
+    * The method sorts the input strings in ascending lexicographical order
+    * using character-wise least significant digit (LSD) radix sort.
+    * It handles variable-length strings by treating missing character as smallest ('null padding').
+    * 
+    * The sorting process is instrumented to count primitive operations
+    * such as assignments, comparisons, array accesses, method calls, and arithmetic.
+    *
+    * @param initArr The array of lowercase strings to be sorted.
+    */
     private static void radixSort(String[] initArr) {
         // Find max length
         int maxLength = 0;
@@ -188,9 +216,13 @@ public class q3_2Array {
         }
     }
 
-    // Function to display a 2D array with a message
-    // This function is used to display the 2D array after each iteration
-    // It takes a message, the 2D array, and the count of elements in each sub-array as input
+    /**
+     * Displays a one-dimensional array of strings with a provided message.
+     *
+     * @param message A descriptive message shown before the array.
+     * @param arr     The string array to be displayed.
+     * @param count   The count of elements in each sub-array.
+     */
     private static void display2DArray(String message, String[][] array, int[] count) {
         System.out.print(message + ": [");
         for (int i = 0; i < N; i++) {
@@ -207,9 +239,12 @@ public class q3_2Array {
         System.out.println("]");
     }
 
-    // Function to display an array with a message
-    // This function is used to display the array before and after sorting
-    // It takes a message and the array as input to display the contents
+    /**
+     * Displays a 1D array along with the current primitive operation count.
+     * 
+     * @param message A message to display before the array output.
+     * @param arr The array to be displayed.
+     */
     private static void displayArray(String message, String[] arr) {
         System.out.print(message + ": [");
         for (int i = 0; i < arr.length; i++) {
@@ -220,6 +255,14 @@ public class q3_2Array {
         System.out.println("]");
     }
 
+    /**
+     * Writes the given data to a CSV file with the specified file name.
+     *
+     * @param fileName The name of the file to write the data to.
+     * @param data     The data to be written to the file.
+     *                 It should be formatted as a CSV string.
+     * @throws IOException If an I/O error occurs while writing to the file.
+     */
     private static void writeToCSV(String filename, String content) {
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write(content);
@@ -228,7 +271,11 @@ public class q3_2Array {
         }
     }
 
-    // Function to get user input for the array
+    /**
+     * Reads an array of integers from user input.
+     * 
+     * @return An integer array entered by the user.
+     */
     private static String[] getUserInput() {
         Scanner scanner = new Scanner(System.in);
         try {

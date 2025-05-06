@@ -11,10 +11,18 @@ public class q2Array {
         displayArray("Sorted list", initArr);
     }
 
-    // Function to perform radix sort
-    // This function sorts the array using radix sort algorithm
-    // It takes an array of strings as input and sorts it in ascending order
-    // It assumes that the strings contain only lowercase letters (a-z)
+    /**
+    * Performs radix sort on the given array of lowercase strings.
+    *
+    * The method sorts the input strings in ascending lexicographical order
+    * using character-wise least significant digit (LSD) radix sort.
+    * It handles variable-length strings by treating missing character as smallest ('null padding').
+    * 
+    * The sorting process is instrumented to count primitive operations
+    * such as assignments, comparisons, array accesses, method calls, and arithmetic.
+    *
+    * @param initArr The array of lowercase strings to be sorted.
+    */
     private static void radixSort(String[] initArr) {
         // Find max length
         int maxLength = 0;
@@ -83,9 +91,13 @@ public class q2Array {
         }
     }
 
-    // Function to display a 2D array with a message
-    // This function is used to display the 2D array after each iteration
-    // It takes a message, the 2D array, and the count of elements in each sub-array as input
+    /**
+     * Displays a one-dimensional array of strings with a provided message.
+     *
+     * @param message A descriptive message shown before the array.
+     * @param arr     The string array to be displayed.
+     * @param count   The count of elements in each sub-array.
+     */
     private static void display2DArray(String message, String[][] array, int[] count) {
         System.out.print(message + ": [");
         for (int i = 0; i < N; i++) {
@@ -102,9 +114,12 @@ public class q2Array {
         System.out.println("]");
     }
 
-    // Function to display an array with a message
-    // This function is used to display the array before and after sorting
-    // It takes a message and the array as input to display the contents
+    /**
+     * Displays a 1D array along with the current primitive operation count.
+     * 
+     * @param message A message to display before the array output.
+     * @param arr The array to be displayed.
+     */
     private static void displayArray(String message, String[] arr) {
         System.out.print(message + ": [");
         for (int i = 0; i < arr.length; i++) {
@@ -115,8 +130,11 @@ public class q2Array {
         System.out.println("]");
     }
 
-    // Function to get user input for the array
-    private static String[] getUserInput() {
+    /**
+     * Reads an array of integers from user input.
+     * 
+     * @return An integer array entered by the user.
+     */    private static String[] getUserInput() {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.print("Enter the number of word(s): ");

@@ -11,10 +11,15 @@ public class q1Array {
         displayArray("Sorted list", initArr);
     }
 
-    // Function to perform radix sort
-    // This function sorts the array using radix sort algorithm
-    // It takes an array of integers as input and sorts it in ascending order
-    // It assumes that the integers are non-negative
+    /**
+    * Performs radix sort on the given array of non-negative integers.
+    *
+    * This method sorts the input array in ascending order using the radix sort algorithm.
+    * It alternates between two temporary 2D arrays (`array1` and `array2`) for each digit place iteration.
+    * A detailed operation counter (`opCount`) is used to count primitive operations for analysis purposes.
+    *
+    * @param initArr The array of non-negative integers to be sorted.
+    */
     private static void radixSort(int[] initArr) {
         // Find max digits
         int max = initArr[0];
@@ -83,9 +88,13 @@ public class q1Array {
         }
     }
 
-    // Function to display the 2D array with a message
-    // This function is used to display the array after each iteration
-    // It takes a message, the 2D array, and the count of elements in each sub-array
+    /**
+     * Displays a 2D array based on the counts in each sub-array.
+     * 
+     * @param message A message to display before the array output.
+     * @param array The 2D array to be displayed.
+     * @param count The count of elements in each sub-array.
+     */
     private static void display2DArray(String message, int[][] array, int[] count) {
         System.out.print(message + ": [");
         for (int i = 0; i < N; i++) {
@@ -102,9 +111,12 @@ public class q1Array {
         System.out.println("]");
     }
 
-    // Function to display the 1D array
-    // This function is used to display the sorted array after each iteration
-    // It takes a message and the array as input to display the contents
+    /**
+     * Displays a 1D array along with the current primitive operation count.
+     * 
+     * @param message A message to display before the array output.
+     * @param arr The array to be displayed.
+     */
     private static void displayArray(String message, int[] arr) {
         System.out.print(message + ": [");
         for (int i = 0; i < arr.length; i++) {
@@ -115,9 +127,13 @@ public class q1Array {
         System.out.println("]");
     }
 
-    // Function to calculate power of a number
-    // This function is used to calculate the power of a number
-    // It takes a base and an exponent and returns the result
+    /**
+     * Computes the power of a number using simple repeated multiplication.
+     * 
+     * @param base The base number.
+     * @param exponent The exponent (non-negative integer).
+     * @return The result of raising base to the power of exponent.
+    */
     private static int pow(int base, int exponent) {
         int result = 1;
         for (int i = 0; i < exponent; i++) {
@@ -126,7 +142,11 @@ public class q1Array {
         return result;
     }
 
-    // Function to get user input for the array
+    /**
+     * Reads an array of integers from user input.
+     * 
+     * @return An integer array entered by the user.
+     */
     private static int[] getUserInput() {
         Scanner scanner = new Scanner(System.in);
         try {

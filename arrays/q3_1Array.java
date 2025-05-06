@@ -64,11 +64,10 @@ public class q3_1Array {
 
     /**
      * Performs radix sort on the given array of non-negative integers.
-     * <p>
+     *
      * This method sorts the input array in ascending order using the radix sort algorithm.
      * It alternates between two temporary 2D arrays (`array1` and `array2`) for each digit place iteration.
      * A detailed operation counter (`opCount`) is used to count primitive operations for analysis purposes.
-     * </p>
      *
      * @param initArr The array of non-negative integers to be sorted.
      */
@@ -200,7 +199,7 @@ public class q3_1Array {
      * 
      * @param message A message to display before the array output.
      * @param array The 2D array to be displayed.
-     * @param count An array that holds the number of valid elements in each sub-array.
+     * @param count The count of elements in each sub-array.
      */
     private static void display2DArray(String message, int[][] array, int[] count) {
         System.out.print(message + ": [");
