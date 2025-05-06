@@ -44,7 +44,7 @@ public class q3_1Array {
             }
         }
 
-        writeToCSV("radix_ops.csv", csvData.toString());
+        writeToCSV("radix_digit_ops.csv", csvData.toString());
     }
     
     /**
@@ -76,10 +76,10 @@ public class q3_1Array {
     private static void radixSort(int[] initArr) {
         // Find max digits
         int max = initArr[0];
-        opCount++; // <counter> 1 Assignment operation
+        opCount++; // <counter> 1 Assignment
 
         for (int i = 0; i < initArr.length; i++) {
-            opCount += 3; // <counter> 1 Assignment, 1 Loop comparison, 1 Operation
+            opCount += 3; // <counter> 1 Assignment, 1 Comparison, 1 Increment
 
             int num = initArr[i];
             opCount += 2; // <counter> 1 Assignment and 1 array access
@@ -87,67 +87,66 @@ public class q3_1Array {
             opCount++; // <counter> 1 Comparison (num > max)
             if (num > max) {
                 max = num;
-                opCount++; // <counter> 1 Assignment operation
+                opCount++; // <counter> 1 Assignment
             }
         }
         int maxDigits = String.valueOf(max).length(); // Number of digits in the largest number
         opCount += 3; // <counter> 1 Assignment and 2 Method calls (String.valueOf and length)
 
         int[][] array1 = new int[N][initArr.length]; // For even iterationsz
-        opCount += 1 + N * initArr.length; // <counter> 1 assignment for 2D array initializations and N row-allocs for each array
+        opCount += 1 + N * initArr.length; // <counter> 1 Assignment for 2D array initializations and N row-allocs for each array
         
         int[][] array2 = new int[N][initArr.length]; // For odd iterations
-        opCount += 1 + N * initArr.length; // <counter> 1 assignment for 2D array initializations and N row-allocs for each array
+        opCount += 1 + N * initArr.length; // <counter> 1 Assignment for 2D array initializations and N row-allocs for each array
         
         int[] count1 = new int[N]; // Count of elements in each sub-array for even iterations
-        opCount += 1 + N; // <counter> 1 assignment and N initialization for 1D memory allocation for array
+        opCount += 1 + N; // <counter> 1 Assignment and N initialization for 1D memory allocation for array
         
         int[] count2 = new int[N]; // Count of elements in each sub-array for odd iterations
-        opCount += 1 + N; // <counter> 1 assignment and N initialization for 1D memory allocation for array
+        opCount += 1 + N; // <counter> 1 Assignment and N initialization for 1D memory allocation for array
 
         // Initialize the count arrays to start extracting from the right most digit
         for (int digitPlace = 0; digitPlace < maxDigits; digitPlace++) {
-            opCount += 3; // <counter> 1 assignment, 1 Loop comparison, 1 Operation
+            opCount += 3; // <counter> 1 Assignment, 1 Comparison, 1 Increment
             
             // System.out.println("Digit place: " + digitPlace);
 
-            opCount += 2; // <counter> 1 operation (digitPlace % 2) and 1 comparison
+            opCount += 2; // <counter> 1 Operation (digitPlace % 2) and 1 Comparison
             if (digitPlace % 2 == 0) { // Even iteration (0, 2, 4, ...)
                 // Reset count1 for even iterations 
                 for (int i = 0; i < N; i++){
-                    opCount += 3; // <counter> 1 assignment, 1 operation, 1 comparison
+                    opCount += 3; // <counter> 1 Assignment, 1 Comparison, 1 Increment
                     
                     count1[i] = 0;
-                    opCount += 2; // <counter> 1 assignment and 1 array access
+                    opCount += 2; // <counter> 1 Assignment and 1 Array Access
                 }
 
                 // Copy the sorted numbers back to initArr from array2 for even iterations
                 for (int i = 0; i < initArr.length; i++){
-                    opCount += 4; // <counter> 1 assignment, 1 Loop comparison, 1 method call (length), and 1 Operation
+                    opCount += 4; // <counter> 1 Assignment, 1 Comparison, 1 Method Call (length()), and 1 Increment
 
                     int number = initArr[i];
-                    opCount += 2; // <counter> 1 assignment and 1 array access
+                    opCount += 2; // <counter> 1 Assignment and 1 Array Access
                     
                     // Extract the digit at the current place value
                     int digit = (number / pow(10, digitPlace)) % N;
-                    opCount += 4; // <counter> 1 method call (pow), 1 division, 1 modulus, 1 assignment
+                    opCount += 4; // <counter> 1 Method Call (pow), 2 Operation (/ and %), 1 Assignment
                     
                     array1[digit][count1[digit]++] = number;
-                    opCount += 5; // <counter> 3 array accesses, 1 assignment, 1 increment
+                    opCount += 5; // <counter> 3 Array Accesses, 1 Assignment, 1 Increment
                 }
 
                 // Display the 2D array after sorting
                 // display2DArray("Array 1", array1, count1);
-                // opCount ++; // <counter> 1 method call
 
                 // Copy the sorted numbers back to initArr from array1
                 int index = 0;
                 opCount ++ ; // <counter> 1 assignment
                 
                 for (int i = 0; i < N; i++) {
-                    opCount += 3; // <counter> 1 assignment, 1 operation, 1 comparison
+                    opCount += 3; // <counter> 1 Assignment, 1 Comparison, 1 Increment
                     for (int j = 0; j < count1[i]; j++) {
-                        opCount += 4; // <counter> 1 assignment, 1 array access, 1 comparison, 1 increment
+                        opCount += 4; // <counter> 1 Assignment, 1 Array Access, 1 Comparison, 1 Increment
                         
                         initArr[index++] = array1[i][j];
                         opCount += 5; // <counter> 1 assignment, 3 array accesses, 1 increment
@@ -156,42 +155,41 @@ public class q3_1Array {
             } else { // Odd iteration
                 // Reset count2 for odd iterations (1, 3, 5, ...)
                 for (int i = 0; i < N; i++){
-                    opCount += 3; // <counter> 1 assignment, 1 operation, 1 comparison
+                    opCount += 3; // <counter> 1 Assignment, 1 Comparison, 1 Increment
                     
                     count2[i] = 0;
-                    opCount += 2; // <counter> 1 assignment and 1 array access
+                    opCount += 2; // <counter> 1 Assignment and 1 Array Access
                 }
 
                 // Copy the sorted numbers back to initArr from array1 for odd iterations
                 for (int i = 0; i < initArr.length; i++){
-                    opCount += 4; // <counter> 1 assignment, 1 comparison, 1 method call (length), and 1 operation
+                    opCount += 4; // <counter> 1 Assignment, 1 Comparison, 1 Method Call (length()), 1 Increment
 
                     int number = initArr[i];
-                    opCount += 2; // <counter> 1 assignment and 1 array access
+                    opCount += 2; // <counter> 1 Assignment, 1 Array Access
 
                     // Extract the digit at the current place value
                     int digit = (number / pow(10, digitPlace)) % N;
-                    opCount += 4; // <counter> 1 method call (pow), 1 division, 1 modulus, 1 assignment
+                    opCount += 4; // <counter> 1 Method Call (pow), 2 Operation (/ and %), 1 Assignment
                     
                     array2[digit][count2[digit]++] = number;
-                    opCount += 5; // <counter> 3 array accesses, 1 assignment, 1 increment
+                    opCount += 5; // <counter> 3 Array Accesses, 1 Assignment, 1 Increment
                 }
 
                 // Display the 2D array after sorting
                 // display2DArray("Array 2", array2, count2);
-                // opCount ++; // <counter> 1 method call
 
                 // Copy the sorted numbers back to initArr from array2
                 int index = 0;
-                opCount ++; // <counter> 1 assignment
+                opCount ++; // <counter> 1 Increment
 
                 for (int i = 0; i < N; i++) {
-                    opCount += 3; // <counter> 1 assignment, 1 operation, 1 comparison
+                    opCount += 3; // <counter> 1 Assignment, 1 Comparison, 1 Increment
                     for (int j = 0; j < count2[i]; j++) {
-                        opCount += 4; // <counter> 1 assignment, 1 array access, 1 comparison, 1 increment
+                        opCount += 4; // <counter> 1 Assignment, 1 Array Access, 1 Comparison, 1 Increment
 
                         initArr[index++] = array2[i][j];
-                        opCount += 5; // <counter> 1 assignment, 3 array accesses, 1 increment
+                        opCount += 5; // <counter> 1 Assignment, 3 Array Accesses, 1 Increment
                     }
                 }
             }
