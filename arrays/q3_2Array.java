@@ -41,7 +41,7 @@ public class q3_2Array {
             }
         }    
     
-        writeToCSV("cpt212-asgn1/arrays/radix_string_ops.csv", csvData.toString());
+        writeToCSV("cpt212-asgn1/arrays/output/radix_string_ops.csv", csvData.toString());
     }
 
     /**

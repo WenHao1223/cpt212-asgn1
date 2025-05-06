@@ -4,8 +4,8 @@ import matplotlib.cm as cm
 import numpy as np
 
 # Load and prepare data
-df_digit = pd.read_csv("radix_digit_ops.csv").rename(columns={"k": "length"})
-df_string = pd.read_csv("radix_string_ops.csv").rename(columns={"maxLength": "length"})
+df_digit = pd.read_csv("output/radix_digit_ops.csv").rename(columns={"k": "length"})
+df_string = pd.read_csv("output/radix_string_ops.csv").rename(columns={"maxLength": "length"})
 df_digit["type"] = "Digit"
 df_string["type"] = "String"
 df_all = pd.concat([df_digit, df_string], ignore_index=True)
