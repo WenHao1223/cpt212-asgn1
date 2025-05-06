@@ -49,8 +49,14 @@ public class q2Array {
                 // Copy the sorted words back to initArr from array2 for even iterations
                 for (int i = 0; i < initArr.length; i++) {
                     String word = initArr[i];
+                    
                     // Extract the character at the current position
-                    int index = pos < word.length() ? word.charAt(pos) - 'a' : 0;
+                    int index;
+                    if (pos < word.length()) {
+                        index = word.charAt(pos) - 'a';
+                    } else {
+                        index = 0;
+                    }
                     array1[index][count1[index]++] = word;
                 }
 
@@ -72,8 +78,14 @@ public class q2Array {
                 // Copy the sorted words back to initArr from array1 for odd iterations
                 for (int i = 0; i < initArr.length; i++) {
                     String word = initArr[i];
+
                     // Extract the character at the current position
-                    int index = pos < word.length() ? word.charAt(pos) - 'a' : 0;
+                    int index;
+                    if (pos < word.length()) {
+                        index = word.charAt(pos) - 'a';
+                    } else {
+                        index = 0;
+                    }
                     array2[index][count2[index]++] = word;
                 }
 
