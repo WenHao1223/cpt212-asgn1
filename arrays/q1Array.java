@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class q1Array {
@@ -18,7 +21,8 @@ public class q1Array {
     private static void radixSort(int[] initArr) {
         // Find max digits
         int max = initArr[0];
-        for (int num : initArr) {
+        for (int i = 0; i < initArr.length; i++) {
+            int num = initArr[i];
             if (num > max)
                 max = num;
         }
@@ -61,7 +65,8 @@ public class q1Array {
                     count2[i] = 0;
 
                 // Copy the sorted numbers back to initArr from array1 for odd iterations
-                for (int number : initArr) {
+                for (int i = 0; i < initArr.length; i++){
+                    int number = initArr[i];
                     // Extract the digit at the current place value
                     int digit = (number / pow(10, digitPlace)) % N;
                     array2[digit][count2[digit]++] = number;

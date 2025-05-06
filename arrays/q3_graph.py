@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load CSV
-df = pd.read_csv(r"d:\Documents\CPT212\cpt212-asgn1\arrays\radix_ops.csv")
+df = pd.read_csv(r"radix_ops.csv")
 
 # Lineplot: one line per k
 plt.figure(figsize=(10, 6))

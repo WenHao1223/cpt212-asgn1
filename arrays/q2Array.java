@@ -18,7 +18,8 @@ public class q2Array {
     private static void radixSort(String[] initArr) {
         // Find max length
         int maxLength = 0;
-        for (String word : initArr) {
+        for (int i = 0; i < initArr.length; i++) {
+            String word = initArr[i];
             if (word.length() > maxLength)
                 maxLength = word.length();
         }
@@ -38,7 +39,8 @@ public class q2Array {
                     count1[i] = 0;
 
                 // Copy the sorted words back to initArr from array2 for even iterations
-                for (String word : initArr) {
+                for (int i = 0; i < initArr.length; i++) {
+                    String word = initArr[i];
                     // Extract the character at the current position
                     int index = pos < word.length() ? word.charAt(pos) - 'a' : 0;
                     array1[index][count1[index]++] = word;
@@ -60,7 +62,8 @@ public class q2Array {
                     count2[i] = 0;
 
                 // Copy the sorted words back to initArr from array1 for odd iterations
-                for (String word : initArr) {
+                for (int i = 0; i < initArr.length; i++) {
+                    String word = initArr[i];
                     // Extract the character at the current position
                     int index = pos < word.length() ? word.charAt(pos) - 'a' : 0;
                     array2[index][count2[index]++] = word;

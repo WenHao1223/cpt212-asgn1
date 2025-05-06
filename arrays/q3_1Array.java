@@ -1,34 +1,50 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class q3Array {
+public class q3_1Array {
     private static final int N = 10; // Base for decimal numbers (0-9)
     private static int opCount = 0; // Counter for Primitive Operations
 
     /**
      * The main method runs multiple tests of the radix sort algorithm
      * on randomly generated arrays of varying sizes and digit lengths.
-     * <p>
+     * 
      * It prints out a CSV-formatted summary of:
      * - n: number of elements in the array
      * - k: number of digits in the maximum possible value
      * - opCount: total primitive operations counted during the sort
-     * </p>
      *
      * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
-        System.out.println("n,k,opCount");
+        StringBuilder csvData = new StringBuilder();
+        csvData.append("n,k,opCount\n");
+        // System.out.println("n,k,opCount");
     
-        for (int n = 100; n <= 1000; n += 200) {
+        for (int n = 10; n <= 100; n += 20) {
             for (int digits = 1; digits <= 5; digits++) {
                 int max = (int) Math.pow(10, digits) - 1;
                 int[] arr = generateRandomArray(n, max);
                 opCount = 0;
+
+                // Display the initial array before sorting
+                displayArray("Initial array (n=" + n + ", digits=" + digits + ")", arr);
+
+                // Perform radix sort
                 radixSort(arr);
-                System.out.println(n + "," + digits + "," + opCount);
+                
+                // Display the array after sorting
+                displayArray("Sorted array (n=" + n + ", digits=" + digits + ")", arr);
+
+                csvData.append(n).append(",").append(digits).append(",").append(opCount).append("\n");
+                // System.out.println(n + "," + digits + "," + opCount);
             }
         }
+
+        writeToCSV("radix_ops.csv", csvData.toString());
     }
     
     /**
@@ -62,25 +78,32 @@ public class q3Array {
         int max = initArr[0];
         opCount++; // <counter> 1 Assignment operation
 
-        for (int num : initArr) {
+        for (int i = 0; i < initArr.length; i++) {
             opCount += 3; // <counter> 1 Assignment, 1 Loop comparison, 1 Operation
+
+            int num = initArr[i];
+            opCount += 2; // <counter> 1 Assignment and 1 array access
             
             opCount++; // <counter> 1 Comparison (num > max)
-            if (num > max)
+            if (num > max) {
                 max = num;
                 opCount++; // <counter> 1 Assignment operation
+            }
         }
         int maxDigits = String.valueOf(max).length(); // Number of digits in the largest number
         opCount += 3; // <counter> 1 Assignment and 2 Method calls (String.valueOf and length)
 
-        int[][] array1 = new int[N][initArr.length]; // For even iterations
+        int[][] array1 = new int[N][initArr.length]; // For even iterationsz
+        opCount += 1 + N * initArr.length; // <counter> 1 assignment for 2D array initializations and N row-allocs for each array
+        
         int[][] array2 = new int[N][initArr.length]; // For odd iterations
-        opCount += 2; // <counter> 1 assignment for two 2D array initializations
-        opCount += 2 * N; // <counter> N row-allocs for each array
+        opCount += 1 + N * initArr.length; // <counter> 1 assignment for 2D array initializations and N row-allocs for each array
         
         int[] count1 = new int[N]; // Count of elements in each sub-array for even iterations
+        opCount += 1 + N; // <counter> 1 assignment and N initialization for 1D memory allocation for array
+        
         int[] count2 = new int[N]; // Count of elements in each sub-array for odd iterations
-        opCount += 2 * 2; // <counter> 1 assignment and 1 initialization for two 1D array
+        opCount += 1 + N; // <counter> 1 assignment and N initialization for 1D memory allocation for array
 
         // Initialize the count arrays to start extracting from the right most digit
         for (int digitPlace = 0; digitPlace < maxDigits; digitPlace++) {
@@ -99,12 +122,15 @@ public class q3Array {
                 }
 
                 // Copy the sorted numbers back to initArr from array2 for even iterations
-                for (int number : initArr) {
-                    opCount += 3; // <counter> 1 assignment, 1 operation, 1 array access
+                for (int i = 0; i < initArr.length; i++){
+                    opCount += 4; // <counter> 1 assignment, 1 Loop comparison, 1 method call (length), and 1 Operation
+
+                    int number = initArr[i];
+                    opCount += 2; // <counter> 1 assignment and 1 array access
                     
                     // Extract the digit at the current place value
                     int digit = (number / pow(10, digitPlace)) % N;
-                    opCount += 4; // <counter> 1 division, 1 pow, 1 modulus, 1 assignment
+                    opCount += 4; // <counter> 1 method call (pow), 1 division, 1 modulus, 1 assignment
                     
                     array1[digit][count1[digit]++] = number;
                     opCount += 5; // <counter> 3 array accesses, 1 assignment, 1 increment
@@ -121,10 +147,10 @@ public class q3Array {
                 for (int i = 0; i < N; i++) {
                     opCount += 3; // <counter> 1 assignment, 1 operation, 1 comparison
                     for (int j = 0; j < count1[i]; j++) {
-                        opCount += 3; // <counter> 1 assignment, 1 array access, 1 increment
+                        opCount += 4; // <counter> 1 assignment, 1 array access, 1 comparison, 1 increment
                         
                         initArr[index++] = array1[i][j];
-                        opCount += 4; // <counter> 1 assignment, 1 array access, 1 increment, 2 array accesses
+                        opCount += 5; // <counter> 1 assignment, 3 array accesses, 1 increment
                     }
                 }
             } else { // Odd iteration
@@ -137,12 +163,15 @@ public class q3Array {
                 }
 
                 // Copy the sorted numbers back to initArr from array1 for odd iterations
-                for (int number : initArr) {
-                    opCount += 3; // <counter> 1 assignment, 1 operation, 1 array access
-                    
+                for (int i = 0; i < initArr.length; i++){
+                    opCount += 4; // <counter> 1 assignment, 1 comparison, 1 method call (length), and 1 operation
+
+                    int number = initArr[i];
+                    opCount += 2; // <counter> 1 assignment and 1 array access
+
                     // Extract the digit at the current place value
                     int digit = (number / pow(10, digitPlace)) % N;
-                    opCount += 4; // <counter> 1 division, 1 pow, 1 modulus, 1 assignment
+                    opCount += 4; // <counter> 1 method call (pow), 1 division, 1 modulus, 1 assignment
                     
                     array2[digit][count2[digit]++] = number;
                     opCount += 5; // <counter> 3 array accesses, 1 assignment, 1 increment
@@ -159,10 +188,10 @@ public class q3Array {
                 for (int i = 0; i < N; i++) {
                     opCount += 3; // <counter> 1 assignment, 1 operation, 1 comparison
                     for (int j = 0; j < count2[i]; j++) {
-                        opCount += 3; // <counter> 1 assignment, 1 array access, 1 increment
+                        opCount += 4; // <counter> 1 assignment, 1 array access, 1 comparison, 1 increment
 
                         initArr[index++] = array2[i][j];
-                        opCount += 4; // <counter> 1 assignment, 1 array access, 1 increment, 2 array accesses
+                        opCount += 5; // <counter> 1 assignment, 3 array accesses, 1 increment
                     }
                 }
             }
@@ -223,6 +252,23 @@ public class q3Array {
             result *= base;
         }
         return result;
+    }
+
+    
+    /**
+     * Writes the given data to a CSV file with the specified file name.
+     *
+     * @param fileName The name of the file to write the data to.
+     * @param data     The data to be written to the file.
+     *                 It should be formatted as a CSV string.
+     * @throws IOException If an I/O error occurs while writing to the file.
+     */
+    private static void writeToCSV(String fileName, String data) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(data);
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
     }
 
     /**
