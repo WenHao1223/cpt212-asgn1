@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class q3_2Array {
+public class q3_2ComplexityString {
     private static final int N = 26; // Base for letters (a-z)
     private static int opCount = 0; // Counter for Primitive Operations
 
@@ -41,7 +41,7 @@ public class q3_2Array {
             }
         }    
     
-        writeToCSV("arrays/output/radix_string_ops.csv", csvData.toString());
+        writeToCSV("output/radix_string_ops.csv", csvData.toString());
     }
 
     /**

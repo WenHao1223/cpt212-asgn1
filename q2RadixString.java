@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class q2Array {
+public class q2RadixString {
     private static final int N = 26; // Base for letters (a-z)
 
     public static void main(String[] args) {

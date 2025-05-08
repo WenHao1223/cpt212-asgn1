@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class q1Array {
+public class q1RadixDigit {
     private static final int N = 10; // Base for decimal numbers (0-9)
 
     public static void main(String[] args) {

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class q3_1Array {
+public class q3_1ComplexityDigit {
     private static final int N = 10; // Base for decimal numbers (0-9)
     private static int opCount = 0; // Counter for Primitive Operations
 
@@ -43,7 +43,7 @@ public class q3_1Array {
                 // System.out.println(n + "," + digits + "," + opCount);
             }
         }
-        writeToCSV("arrays/output/radix_digit_ops.csv", csvData.toString());
+        writeToCSV("output/radix_digit_ops.csv", csvData.toString());
     }
     
     /**

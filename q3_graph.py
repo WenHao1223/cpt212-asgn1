@@ -37,8 +37,8 @@ plt.ylabel("Primitive Operations")
 plt.legend(title="Digit Length")
 plt.grid(True)
 plt.tight_layout()
-# Save the plot graph to output_plot/q3_1.png
-plt.savefig("output_plot/q3_1.png", dpi=300, bbox_inches='tight')
+# Save the plot graph to output_plot/q3_1ComplexityDigit.png
+plt.savefig("output_plot/q3_1ComplexityDigit.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 # ---------- 2. STRING SORT GRAPH ----------
@@ -54,8 +54,8 @@ plt.ylabel("Primitive Operations")
 plt.legend(title="String Length")
 plt.grid(True)
 plt.tight_layout()
-# Save the plot graph to output_plot/q3_2.png
-plt.savefig("output_plot/q3_2.png", dpi=300, bbox_inches='tight')
+# Save the plot graph to output_plot/q3_2ComplexityString.png
+plt.savefig("output_plot/q3_2ComplexityString.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 # ---------- 3. COMBINED COMPARISON GRAPH ----------
@@ -78,6 +78,6 @@ plt.ylabel("Primitive Operations")
 plt.legend(title="Type & Length")
 plt.grid(True)
 plt.tight_layout()
-# Save the plot graph to output_plot/q3_combined.png
-plt.savefig("output_plot/q3_combined.png", dpi=300, bbox_inches='tight')
+# Save the plot graph to output_plot/q3ComplexityGraph.png
+plt.savefig("output_plot/q3ComplexityGraph.png", dpi=300, bbox_inches='tight')
 plt.show()
